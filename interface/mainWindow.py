@@ -12,9 +12,11 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeLength = codeLength
 
         self.masterMind = MasterMind(self.codeLength)
+        print("CODE: ", self.masterMind.code)
         self.history = []
         self.timer = QTimer()
         self.countDownTime = 5
+        self.count = 0
 
         self.codeEdit.setMaxLength(20)
         sample = "_ " * self.codeLength
@@ -100,6 +102,13 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         code = self.codeEdit.text()
         if len(code) != self.codeLength:
             return
+        try:
+            int(code)
+        except TypeError:
+            self.codeEdit.setText("")
+            return
+
+        self.count += 1
         self.codeEdit.setText("")
         self.codeLabel.setText(code)
         self.codeLabel.setVisible(True)
@@ -122,4 +131,19 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.tableWidget.setItem(19-i, j, item)
 
     def success(self):
-        print("Success")
+        self.timer.timeout.disconnect()
+        time = self.timeEdit.text()
+
+        palette = self.buttonStart.palette()
+        brush = QtGui.QBrush(QtGui.QColor(2, 179, 0))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
+        self.buttonStart.setPalette(palette)
+
+        self.buttonStart.setText("Defused in {}\n with {} tries".format(time, self.count))
+
+        self.codeEdit.setMaxLength(30)
+        self.codeEdit.setText("MASTERMIND")
+
+        self.timeEdit.hide()
+        self.buttonStart.show()
