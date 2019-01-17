@@ -1,11 +1,21 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtCore import pyqtSignal
 from interface.menuWindowUi import Ui_menuWindow
+from interface.mainWindow import MainWindow
 
 
 class MenuWindow(QMainWindow, Ui_menuWindow):
-    historySignal = pyqtSignal(int)
-
     def __init__(self):
         super(MenuWindow, self).__init__()
         self.setupUi(self)
+        self.button4.clicked.connect(self.launchMasterMind)
+        self.button5.clicked.connect(self.launchMasterMind)
+        self.button6.clicked.connect(self.launchMasterMind)
+        self.mainWindow = None
+
+    def launchMasterMind(self):
+        codeLength = int(self.sender().text()[0])
+
+        self.mainWindow = MainWindow(codeLength)
+        self.mainWindow.show()
+
+        self.close()

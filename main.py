@@ -10,8 +10,8 @@ def main():
     app.setAttribute(Qt.AA_EnableHighDpiScaling)
     app.setStyle("fusion")
 
-    loginWindow = MenuWindow()
-    loginWindow.show()
+    mainWindow = MenuWindow()
+    mainWindow.show()
     sys.exit(app.exec_())
 
 
