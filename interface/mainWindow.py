@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QLCDNumber, QDesktopWidget, QPushButton, QSizePolicy
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QSizePolicy, QTableWidgetItem, QHeaderView
 from PyQt5.QtCore import QSize, Qt, QTimer
 from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
@@ -12,12 +12,14 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeLength = codeLength
 
         self.masterMind = MasterMind(self.codeLength)
+        self.history = []
         self.timer = QTimer()
         self.countDownTime = 5
 
-        self.codeEdit.setMaxLength(self.codeLength)
-        self.codeEdit.setText("")
-        self.codeLabel.setText("    ")
+        self.codeEdit.setMaxLength(20)
+        sample = "_ " * self.codeLength
+        self.codeEdit.setText(sample[:-1])
+        self.codeLabel.setText(" " * self.codeLength*2)
         self.lcdNumbers.display(0)
         self.lcdPositions.display(0)
 
@@ -26,6 +28,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.buttonStart = QPushButton(self.centralwidget)
         self.setStart()
+        self.initHistory()
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -55,6 +58,16 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.buttonStart.clicked.connect(self.startCountDown)
 
+    def initHistory(self):
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setRowCount(20)
+        self.tableWidget.scrollToBottom()
+
+        header = self.tableWidget.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.Stretch)
+
     def startCountDown(self):
         self.buttonStart.setText(str(self.countDownTime))
 
@@ -72,6 +85,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart.hide()
         self.timeEdit.show()
 
+        self.codeEdit.setMaxLength(self.codeLength)
+        self.codeEdit.setText("")
         self.codeEdit.setDisabled(False)
         self.codeEdit.setFocus()
 
@@ -87,7 +102,24 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             return
         self.codeEdit.setText("")
         self.codeLabel.setText(code)
+        self.codeLabel.setVisible(True)
 
         numbers, positions = self.masterMind.unlock(code)
         self.lcdNumbers.display(numbers)
         self.lcdPositions.display(positions)
+
+        if positions == self.codeLength:
+            self.success()
+
+        self.history.append([numbers, code, positions])
+        self.refreshHistory()
+
+    def refreshHistory(self):
+        for i, line in enumerate(reversed(self.history)):
+            for j, info in enumerate(line):
+                item = QTableWidgetItem(str(info))
+                item.setTextAlignment(Qt.AlignHCenter)
+                self.tableWidget.setItem(19-i, j, item)
+
+    def success(self):
+        print("Success")
