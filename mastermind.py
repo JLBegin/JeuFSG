@@ -35,7 +35,7 @@ def main():
             break
         else:
             count += 1
-            if count == 10:
+            if count == 15:
                 print('GAME OVER. It was ' + theCode)
                 break
 
