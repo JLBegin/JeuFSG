@@ -100,36 +100,31 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timer.timeout.connect(self.timerTick)
         self.timer.start(1000)
-        
+
         self.threadpool.start(self.serialWorker)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
     def waitCode(self, pyqtSignal=None):
-        reading = 1
         code = []
-        while reading == 1:
+        while True:
             number = self.waitNumber()
             if number != '*':
                 code.append(number)
                 self.codeEdit.setText(''.join(code))
             else:
-                self.enterCode()
                 self.codeEdit.setText(''.join(code))
-                reading = 0
+                self.enterCode()
+                code = []
 
     def waitNumber(self):
-        reading = 1
-        number = ''
-        while reading == 1:
+        while True:
             s1 = self.ser.read(1)
             if s1.decode('ASCII') == 'U':
                 number = self.ser.read().decode('ASCII')
                 print(number)
-            else:
-                reading = 0
-        return number
+                return number
 
     def enterCode(self):
         code = self.codeEdit.text()
