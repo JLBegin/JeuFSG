@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QSizePolicy, QTableWidgetItem, QHeaderView
-from PyQt5.QtCore import QSize, Qt, QTimer
+from PyQt5.QtCore import QSize, Qt, QTimer, QThreadPool
 from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
 from mastermind import MasterMind
+from threadWorker import Worker
 import serial
 
 
@@ -13,6 +14,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeLength = codeLength
         self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
                                  stopbits=serial.STOPBITS_ONE)
+        self.threadpool = QThreadPool()
+        self.serialWorker = Worker(self.waitCode)
 
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
@@ -34,7 +37,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart = QPushButton(self.centralwidget)
         self.setStart()
         self.initHistory()
-
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -98,12 +100,13 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timer.timeout.connect(self.timerTick)
         self.timer.start(1000)
-        self.waitCode()
+        
+        self.threadpool.start(self.serialWorker)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
-    def waitCode(self):
+    def waitCode(self, pyqtSignal=None):
         reading = 1
         code = []
         while reading == 1:
@@ -115,7 +118,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.enterCode()
                 self.codeEdit.setText(''.join(code))
                 reading = 0
-
 
     def waitNumber(self):
         reading = 1
