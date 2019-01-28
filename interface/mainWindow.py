@@ -3,6 +3,7 @@ from PyQt5.QtCore import QSize, Qt, QTimer
 from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
 from mastermind import MasterMind
+import serial
 
 
 class MainWindow(QMainWindow, Ui_mainWindow):
@@ -10,6 +11,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.codeLength = codeLength
+        self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
+                                 stopbits=serial.STOPBITS_ONE)
 
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
@@ -31,6 +34,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart = QPushButton(self.centralwidget)
         self.setStart()
         self.initHistory()
+
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -94,9 +98,36 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timer.timeout.connect(self.timerTick)
         self.timer.start(1000)
+        self.waitCode()
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
+
+    def waitCode(self):
+        reading = 1
+        code = []
+        while reading == 1:
+            number = self.waitNumber()
+            if number != '*':
+                code.append(number)
+                self.codeEdit.setText(''.join(code))
+            else:
+                self.enterCode()
+                self.codeEdit.setText(''.join(code))
+                reading = 0
+
+
+    def waitNumber(self):
+        reading = 1
+        number = ''
+        while reading == 1:
+            s1 = self.ser.read(1)
+            if s1.decode('ASCII') == 'U':
+                number = self.ser.read().decode('ASCII')
+                print(number)
+            else:
+                reading = 0
+        return number
 
     def enterCode(self):
         code = self.codeEdit.text()
