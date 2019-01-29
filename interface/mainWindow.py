@@ -230,5 +230,12 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.timeEdit.hide()
 
         self.buttonStart.disconnect()
+        self.buttonStart.clicked.connect(self.restartSameLength)
         self.buttonStart.show()
         # todo: add self.close and open back initial game mode menu
+
+    def restartSameLength(self):
+        self.newGame = MainWindow(self.codeLength)
+        self.newGame.show()
+
+        self.close()
