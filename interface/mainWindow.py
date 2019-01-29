@@ -189,6 +189,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 return number
             elif s1.decode('ASCII') == 'T':
                 self.timerSignal.emit()
+            elif s1.decode('ASCII') == 'E':
+                self.failed()
+                return
             else:
                 continue
 
@@ -201,6 +204,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         except TypeError:
             self.codeEdit.setText("")
             return
+
+        # # FIXME: TESTING
+        # if code == "1111":
+        #     self.failed()
 
         self.count += 1
         self.codeEdit.setText("")
@@ -241,6 +248,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setText("MASTERMIND")
 
         self.timeEdit.hide()
+        self.codeSignal.disconnect()
         self.buttonStart.disconnect()
         self.buttonStart.show()
 
@@ -254,3 +262,23 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         timeZero = QTime(0, 0, 0)
         self.timeEdit.setTime(timeZero)
         self.setStart(restart=True)
+
+    def failed(self):
+        self.timer.timeout.disconnect()
+
+        palette = self.buttonStart.palette()
+        brush = QtGui.QBrush(QtGui.QColor(179, 2, 0))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
+        self.buttonStart.setPalette(palette)
+
+        self.buttonStart.setText("FAILED")
+
+        self.codeEdit.setMaxLength(30)
+        self.codeEdit.setText("FAILED")
+        self.codeLabel.setText("FAILED")
+        self.codeSignal.disconnect()
+
+        self.timeEdit.hide()
+        self.buttonStart.disconnect()
+        self.buttonStart.show()
