@@ -16,15 +16,15 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.codeLength = codeLength
-        self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
-                                 stopbits=serial.STOPBITS_ONE)
+        # self.ser = serial.Serial(port='COM6', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
+        #                          stopbits=serial.STOPBITS_ONE)
         self.threadPool = QThreadPool()
 
-        self.serialSetCode = Worker(self.setCode)
-        self.serialTryCode = Worker(self.waitCode)
+        # self.serialSetCode = Worker(self.setCode)
+        # self.serialTryCode = Worker(self.waitCode)
 
         self.masterMind = MasterMind(self.codeLength)
-        print("CODE: ", self.masterMind.code)
+        # print("CODE: ", self.masterMind.code)
         self.history = []
         self.timer = QTimer()
         self.countDownTime = 5
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeSignal.connect(self.enterCode)
         self.timerSignal.connect(self.timerTick)
         self.startSignal.connect(self.startCountDown)
-        self.threadPool.start(self.serialSetCode)
+        # self.threadPool.start(self.serialSetCode)
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -58,24 +58,24 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart.setMinimumSize(QSize(0, 200))
 
         palette = self.buttonStart.palette()
-        brush = QtGui.QBrush(QtGui.QColor(179, 179, 2))
+        brush = QtGui.QBrush(QtGui.QColor(179, 2, 0))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
         self.buttonStart.setPalette(palette)
 
         font = QtGui.QFont()
         font.setFamily("BankGothic Md BT")
-        font.setPointSize(48)
+        font.setPointSize(60)
         self.buttonStart.setFont(font)
         self.buttonStart.setDefault(True)
-        self.buttonStart.setText("Waiting for connection...")
+        self.buttonStart.setText("Defuse")
 
         self.verticalLayout_2.addWidget(self.buttonStart)
 
         self.timeEdit.hide()
         self.buttonStart.show()
 
-        # self.buttonStart.clicked.connect(self.startCountDown)
+        self.buttonStart.clicked.connect(self.startCountDown)
 
     def initHistory(self):
         self.tableWidget.setColumnCount(3)
@@ -109,10 +109,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setDisabled(False)
         self.codeEdit.setFocus()
 
-        #self.timer.timeout.connect(self.timerTick)
-        #self.timer.start(1155)
+        self.timer.timeout.connect(self.timerTick)
+        self.timer.start(1155)
 
-        self.threadPool.start(self.serialTryCode)
+        # self.threadPool.start(self.serialTryCode)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
@@ -229,4 +229,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setText("MASTERMIND")
 
         self.timeEdit.hide()
+
+        self.buttonStart.disconnect()
         self.buttonStart.show()
+        # todo: add self.close and open back initial game mode menu
