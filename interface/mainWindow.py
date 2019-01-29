@@ -66,14 +66,14 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         font.setPointSize(48)
         self.buttonStart.setFont(font)
         self.buttonStart.setDefault(True)
-        self.buttonStart.setText("Waiting for connection...")  # todo: "waiting for connection ..."
+        self.buttonStart.setText("Waiting for connection...")
 
         self.verticalLayout_2.addWidget(self.buttonStart)
 
         self.timeEdit.hide()
         self.buttonStart.show()
 
-        # self.buttonStart.clicked.connect(self.startCountDown)  # todo: unlink
+        # self.buttonStart.clicked.connect(self.startCountDown)
 
     def initHistory(self):
         self.tableWidget.setColumnCount(3)
@@ -108,7 +108,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setFocus()
 
         self.timer.timeout.connect(self.timerTick)
-        self.timer.start(1000)
+        self.timer.start(1382)
 
         self.threadPool.start(self.serialTryCode)
 
