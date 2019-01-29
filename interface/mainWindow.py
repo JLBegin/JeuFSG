@@ -7,6 +7,13 @@ from threadWorker import Worker
 import serial
 
 
+HARDWARE = True
+if HARDWARE:
+    PORT = 'COM4'
+else:
+    PORT = 'COM6'
+
+
 class MainWindow(QMainWindow, Ui_mainWindow):
     codeSignal = pyqtSignal()
     timerSignal = pyqtSignal()
@@ -17,7 +24,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             super(MainWindow, self).__init__()
             self.setupUi(self)
             self.buttonBackToMenu.clicked.connect(self.backToMenu)
-            self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
+            self.ser = serial.Serial(port=PORT, baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE)
             self.codeLength = codeLength
             self.menuWindow = menuWindow
@@ -75,7 +82,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         font.setPointSize(48)
         self.buttonStart.setFont(font)
         self.buttonStart.setDefault(True)
-        self.buttonStart.setText("Waiting for connection...")
 
         if not restart:
             self.verticalLayout_2.addWidget(self.buttonStart)
@@ -83,7 +89,12 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.timeEdit.hide()
         self.buttonStart.show()
 
-        # self.buttonStart.clicked.connect(self.startCountDown)
+        if not HARDWARE:
+            self.buttonStart.setText("DEFUSE")
+            self.buttonStart.clicked.connect(self.startCountDown)
+        else:
+            self.buttonStart.setText("Waiting for connection...")
+
         self.timeEdit.setStyleSheet("color: rgb(56, 115, 255)")
 
     def initHistory(self):
@@ -121,8 +132,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setFocus()
 
         self.timer.timeout.disconnect()
-        # self.timer.timeout.connect(self.timerTick)
-        # self.timer.start(1155)
+
+        if not HARDWARE:
+            self.timer.timeout.connect(self.timerTick)
+            self.timer.start(1155)
 
         self.threadPool.start(self.serialTryCode)
 
