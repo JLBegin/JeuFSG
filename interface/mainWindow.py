@@ -14,8 +14,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeLength = codeLength
         self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
                                  stopbits=serial.STOPBITS_ONE)
-        self.threadpool = QThreadPool()
-        self.serialWorker = Worker(self.waitCode)
+        self.threadPool = QThreadPool()
+        self.serialCode = Worker(self.waitCode)
+        #self.serialNum = Worker(self.waitNumber)
 
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
@@ -101,16 +102,22 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.timer.timeout.connect(self.timerTick)
         self.timer.start(1000)
 
-        self.threadpool.start(self.serialWorker)
+        self.threadPool.start(self.serialCode)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
-    def waitCode(self, pyqtSignal=None):
+    def waitStart(self):
+        pass
+
+    def waitCode(self, statusSignal=None):
         code = []
         while True:
+            #self.threadpool.start(self.serialNum)
+            print('HELLO')
             number = self.waitNumber()
             if number != '*':
+                print("Code intercept")
                 code.append(number)
                 self.codeEdit.setText(''.join(code))
             else:
@@ -118,13 +125,15 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.enterCode()
                 code = []
 
-    def waitNumber(self):
+    def waitNumber(self, pyqtSignal=None):
         while True:
-            s1 = self.ser.read(1)
+            s1 = self.ser.read()
             if s1.decode('ASCII') == 'U':
                 number = self.ser.read().decode('ASCII')
                 print(number)
                 return number
+            else:
+                continue
 
     def enterCode(self):
         code = self.codeEdit.text()
