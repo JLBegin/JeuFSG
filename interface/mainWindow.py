@@ -16,18 +16,15 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         if not restart:
             super(MainWindow, self).__init__()
             self.setupUi(self)
+            self.buttonBackToMenu.clicked.connect(self.backToMenu)
             self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE)
             self.codeLength = codeLength
             self.menuWindow = menuWindow
 
-            print("2")
             self.threadPool = QThreadPool()
-
             self.serialSetCode = Worker(self.setCode)
-            print("3")
             self.serialTryCode = Worker(self.waitCode)
-            print("4")
 
         self.found = False
         self.masterMind = MasterMind(self.codeLength)
@@ -52,7 +49,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             self.setStart()
 
         self.initHistory()
-        print("5")
 
         self.codeSignal.connect(self.enterCode)
         self.timerSignal.connect(self.timerTick)
@@ -246,7 +242,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timeEdit.hide()
         self.buttonStart.disconnect()
-        self.buttonStart.clicked.connect(self.backToMenu)  # todo: change to backButton (GUI)
         self.buttonStart.show()
 
     def backToMenu(self):
@@ -256,7 +251,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
     def reset(self):
         self.__init__(restart=True)
-        self.buttonStart.disconnect()
         timeZero = QTime(0, 0, 0)
         self.timeEdit.setTime(timeZero)
         self.setStart(restart=True)
