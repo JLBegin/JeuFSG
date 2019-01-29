@@ -9,6 +9,7 @@ import serial
 
 class MainWindow(QMainWindow, Ui_mainWindow):
     codeSignal = pyqtSignal()
+    timerSignal = pyqtSignal()
     startSignal = pyqtSignal()
 
     def __init__(self, codeLength):
@@ -44,6 +45,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.initHistory()
 
         self.codeSignal.connect(self.enterCode)
+        self.timerSignal.connect(self.timerTick)
         self.startSignal.connect(self.startCountDown)
         self.threadPool.start(self.serialSetCode)
 
@@ -107,8 +109,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setDisabled(False)
         self.codeEdit.setFocus()
 
-        self.timer.timeout.connect(self.timerTick)
-        self.timer.start(1382)
+        #self.timer.timeout.connect(self.timerTick)
+        #self.timer.start(1155)
 
         self.threadPool.start(self.serialTryCode)
 
@@ -174,6 +176,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 number = self.ser.read().decode('ASCII')
                 print(number)
                 return number
+            elif s1.decode('ASCII') == 'T':
+                self.timerSignal.emit()
             else:
                 continue
 
