@@ -1043,8 +1043,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1099,8 +1099,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1211,7 +1211,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>29</pointsize>
+            <pointsize>45</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -1249,8 +1249,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1287,8 +1287,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1404,8 +1404,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1442,8 +1442,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1553,8 +1553,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1591,8 +1591,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1702,8 +1702,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1740,8 +1740,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>114</red>
-                <green>230</green>
+                <red>73</red>
+                <green>192</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1842,9 +1842,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -1898,9 +1898,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2010,7 +2010,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>29</pointsize>
+            <pointsize>45</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -2048,9 +2048,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2086,9 +2086,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2203,9 +2203,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2241,9 +2241,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2352,9 +2352,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2390,9 +2390,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2501,9 +2501,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2539,9 +2539,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>156</red>
+                <red>99</red>
                 <green>255</green>
-                <blue>159</blue>
+                <blue>104</blue>
                </color>
               </brush>
              </colorrole>
@@ -2755,7 +2755,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>29</pointsize>
+            <pointsize>45</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -3554,7 +3554,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>29</pointsize>
+            <pointsize>45</pointsize>
            </font>
           </property>
           <property name="frameShape">

@@ -30,6 +30,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
         self.history = []
+        self.maxTime = [45, 60, 90, 120]
         self.timer = QTimer()
         self.countDownTime = 5
         self.count = 0
@@ -83,6 +84,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart.show()
 
         # self.buttonStart.clicked.connect(self.startCountDown)
+        self.timeEdit.setStyleSheet("color: rgb(56, 115, 255)")
 
     def initHistory(self):
         self.tableWidget.setColumnCount(3)
@@ -118,13 +120,28 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setDisabled(False)
         self.codeEdit.setFocus()
 
-        self.timer.timeout.connect(self.timerTick)
-        self.timer.start(1155)
+        self.timer.timeout.disconnect()
+        # self.timer.timeout.connect(self.timerTick)
+        # self.timer.start(1155)
 
         self.threadPool.start(self.serialTryCode)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
+
+        time = self.timeEdit.time().second()
+        maxTime = self.maxTime[self.codeLength-4]
+
+        if time < maxTime - 30:
+            color = "(56, 115, 255)"
+        elif time < maxTime - 15:
+            color = "(75, 255, 75)"
+        elif time < maxTime - 5:
+            color = "(255, 255, 255)"
+        else:
+            color = "(255, 75, 75)"
+
+        self.timeEdit.setStyleSheet("color: rgb{}".format(color))
 
     def waitStart(self):
         while True:
