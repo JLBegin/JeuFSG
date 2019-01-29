@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QSizePolicy, QTableWidgetItem, QHeaderView
-from PyQt5.QtCore import QSize, Qt, QTimer, QThreadPool, pyqtSignal
+from PyQt5.QtCore import QSize, Qt, QTimer, QThreadPool, pyqtSignal, QTime
 from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
 from mastermind import MasterMind
@@ -12,17 +12,24 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     timerSignal = pyqtSignal()
     startSignal = pyqtSignal()
 
-    def __init__(self, codeLength):
-        super(MainWindow, self).__init__()
-        self.setupUi(self)
-        self.codeLength = codeLength
-        self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
-                                 stopbits=serial.STOPBITS_ONE)
-        self.threadPool = QThreadPool()
+    def __init__(self, codeLength=None, menuWindow=None, restart=False):
+        if not restart:
+            super(MainWindow, self).__init__()
+            self.setupUi(self)
+            self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
+                                     stopbits=serial.STOPBITS_ONE)
+            self.codeLength = codeLength
+            self.menuWindow = menuWindow
 
-        self.serialSetCode = Worker(self.setCode)
-        self.serialTryCode = Worker(self.waitCode)
+            print("2")
+            self.threadPool = QThreadPool()
 
+            self.serialSetCode = Worker(self.setCode)
+            print("3")
+            self.serialTryCode = Worker(self.waitCode)
+            print("4")
+
+        self.found = False
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
         self.history = []
@@ -40,16 +47,19 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.returnPressed.connect(self.enterCode)
         self.codeEdit.setDisabled(True)
 
-        self.buttonStart = QPushButton(self.centralwidget)
-        self.setStart()
+        if not restart:
+            self.buttonStart = QPushButton(self.centralwidget)
+            self.setStart()
+
         self.initHistory()
+        print("5")
 
         self.codeSignal.connect(self.enterCode)
         self.timerSignal.connect(self.timerTick)
         self.startSignal.connect(self.startCountDown)
         self.threadPool.start(self.serialSetCode)
 
-    def setStart(self):
+    def setStart(self, restart=False):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -70,7 +80,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart.setDefault(True)
         self.buttonStart.setText("Waiting for connection...")
 
-        self.verticalLayout_2.addWidget(self.buttonStart)
+        if not restart:
+            self.verticalLayout_2.addWidget(self.buttonStart)
 
         self.timeEdit.hide()
         self.buttonStart.show()
@@ -86,6 +97,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         header.setSectionResizeMode(0, QHeaderView.Stretch)
         header.setSectionResizeMode(1, QHeaderView.Stretch)
         header.setSectionResizeMode(2, QHeaderView.Stretch)
+
+        self.tableWidget.clear()
 
     def startCountDown(self):
         self.buttonStart.setText(str(self.countDownTime))
@@ -109,8 +122,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setDisabled(False)
         self.codeEdit.setFocus()
 
-        #self.timer.timeout.connect(self.timerTick)
-        #self.timer.start(1155)
+        self.timer.timeout.connect(self.timerTick)
+        self.timer.start(1155)
 
         self.threadPool.start(self.serialTryCode)
 
@@ -161,7 +174,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         code = []
         while True:
             number = self.waitNumber()
-            if number != '*':
+            if self.found:
+                return
+            elif number != '*':
                 code.append(number)
                 self.codeEdit.setText(''.join(code))
             else:
@@ -214,6 +229,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.tableWidget.setItem(19-i, j, item)
 
     def success(self):
+        self.found = True
         self.timer.timeout.disconnect()
         time = self.timeEdit.text()
 
@@ -230,4 +246,17 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timeEdit.hide()
         self.buttonStart.disconnect()
+        self.buttonStart.clicked.connect(self.backToMenu)  # todo: change to backButton (GUI)
         self.buttonStart.show()
+
+    def backToMenu(self):
+        self.menuWindow.mainWindow = self
+        self.menuWindow.show()
+        self.close()
+
+    def reset(self):
+        self.__init__(restart=True)
+        self.buttonStart.disconnect()
+        timeZero = QTime(0, 0, 0)
+        self.timeEdit.setTime(timeZero)
+        self.setStart(restart=True)

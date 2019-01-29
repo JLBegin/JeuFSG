@@ -15,7 +15,11 @@ class MenuWindow(QMainWindow, Ui_menuWindow):
     def launchMasterMind(self):
         codeLength = int(self.sender().text()[0])
 
-        self.mainWindow = MainWindow(codeLength)
+        if not self.mainWindow:
+            self.mainWindow = MainWindow(codeLength, self)
+        else:
+            self.mainWindow.codeLength = codeLength
+            self.mainWindow.reset()
         self.mainWindow.show()
 
         self.close()
