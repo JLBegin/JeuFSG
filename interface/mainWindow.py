@@ -110,7 +110,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.timer.timeout.connect(self.timerTick)
         self.timer.start(1000)
 
-        self.threadPool.start(self.serialCode)
+        self.threadPool.start(self.serialTryCode)
 
     def timerTick(self):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
@@ -170,7 +170,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     def waitNumber(self):
         while True:
             s1 = self.ser.read()
-            if s1.decode('ASCII') == ('U' or 'N'):
+            if s1.decode('ASCII') == 'U' or s1.decode('ASCII') == 'N':
                 number = self.ser.read().decode('ASCII')
                 print(number)
                 return number
