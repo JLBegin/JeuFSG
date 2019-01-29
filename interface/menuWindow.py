@@ -10,6 +10,7 @@ class MenuWindow(QMainWindow, Ui_menuWindow):
         self.button4.clicked.connect(self.launchMasterMind)
         self.button5.clicked.connect(self.launchMasterMind)
         self.button6.clicked.connect(self.launchMasterMind)
+        self.button7.clicked.connect(self.launchMasterMind)
         self.mainWindow = None
 
     def launchMasterMind(self):

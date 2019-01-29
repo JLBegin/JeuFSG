@@ -51,14 +51,156 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QFrame" name="frame">
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>190</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>255</red>
+                  <green>255</green>
+                  <blue>255</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>38</red>
+                  <green>38</green>
+                  <blue>38</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>29</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Game Mode</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QPushButton" name="button4">
@@ -269,7 +411,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>18</pointsize>
+            <pointsize>22</pointsize>
            </font>
           </property>
           <property name="text">
@@ -489,7 +631,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>18</pointsize>
+            <pointsize>22</pointsize>
            </font>
           </property>
           <property name="text">
@@ -709,7 +851,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>18</pointsize>
+            <pointsize>22</pointsize>
            </font>
           </property>
           <property name="text">
@@ -875,7 +1017,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>18</pointsize>
+            <pointsize>22</pointsize>
            </font>
           </property>
           <property name="text">
@@ -891,7 +1033,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <property name="spacing">
-         <number>15</number>
+         <number>10</number>
         </property>
         <item>
          <widget class="QLabel" name="label">
@@ -901,8 +1043,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -957,8 +1099,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1073,7 +1215,7 @@
            </font>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="text">
            <string>3x</string>
@@ -1084,6 +1226,22 @@
          </widget>
         </item>
         <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="label_8">
           <property name="palette">
            <palette>
@@ -1091,8 +1249,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1129,8 +1287,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1205,14 +1363,36 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 0:15</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -1224,8 +1404,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1262,8 +1442,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1338,14 +1518,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 0:30</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -1357,8 +1553,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1395,8 +1591,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1471,14 +1667,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:00</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_9">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -1490,8 +1702,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1528,8 +1740,8 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
-                <green>255</green>
+                <red>114</red>
+                <green>230</green>
                 <blue>255</blue>
                </color>
               </brush>
@@ -1604,11 +1816,11 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:30</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -1620,7 +1832,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <property name="spacing">
-         <number>15</number>
+         <number>10</number>
         </property>
         <item>
          <widget class="QLabel" name="label_2">
@@ -1630,9 +1842,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -1686,9 +1898,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -1802,7 +2014,7 @@
            </font>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="text">
            <string>2x</string>
@@ -1813,6 +2025,22 @@
          </widget>
         </item>
         <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="label_9">
           <property name="palette">
            <palette>
@@ -1820,9 +2048,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -1858,9 +2086,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -1934,14 +2162,36 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 0:30</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -1953,9 +2203,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -1991,9 +2241,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -2067,14 +2317,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 0:45</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_6">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -2086,9 +2352,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -2124,9 +2390,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -2200,14 +2466,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:15</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_10">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -2219,9 +2501,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -2257,9 +2539,9 @@
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>255</red>
+                <red>156</red>
                 <green>255</green>
-                <blue>255</blue>
+                <blue>159</blue>
                </color>
               </brush>
              </colorrole>
@@ -2333,11 +2615,11 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:45</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -2349,7 +2631,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
-         <number>15</number>
+         <number>10</number>
         </property>
         <item>
          <widget class="QLabel" name="label_4">
@@ -2476,6 +2758,9 @@
             <pointsize>29</pointsize>
            </font>
           </property>
+          <property name="frameShape">
+           <enum>QFrame::WinPanel</enum>
+          </property>
           <property name="text">
            <string>1x</string>
           </property>
@@ -2483,6 +2768,22 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QLabel" name="label_7">
@@ -2606,14 +2907,36 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 0:45</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -2739,14 +3062,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:00</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_7">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -2872,14 +3211,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 1:30</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_11">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -3005,11 +3360,11 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>&lt; 2:00</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -3021,7 +3376,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <property name="spacing">
-         <number>15</number>
+         <number>10</number>
         </property>
         <item>
          <widget class="QLabel" name="label_3">
@@ -3032,8 +3387,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3088,8 +3443,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3203,7 +3558,7 @@
            </font>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="text">
            <string>0x</string>
@@ -3214,6 +3569,22 @@
          </widget>
         </item>
         <item>
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="label_15">
           <property name="palette">
            <palette>
@@ -3222,8 +3593,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3260,8 +3631,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3335,14 +3706,36 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>0:45</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -3355,8 +3748,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3393,8 +3786,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3468,14 +3861,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>1:00</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_8">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -3488,8 +3897,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3526,8 +3935,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3601,14 +4010,30 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>1:30</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_12">
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>2</number>
+          </property>
+          <property name="midLineWidth">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -3621,8 +4046,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3659,8 +4084,8 @@
               <brush brushstyle="SolidPattern">
                <color alpha="255">
                 <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
+                <green>102</green>
+                <blue>102</blue>
                </color>
               </brush>
              </colorrole>
@@ -3734,11 +4159,11 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>29</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>X</string>
+           <string>2:00</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
