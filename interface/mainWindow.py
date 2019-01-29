@@ -4,7 +4,6 @@ from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
 from mastermind import MasterMind
 from threadWorker import Worker
-import serial
 
 
 class MainWindow(QMainWindow, Ui_mainWindow):
