@@ -229,4 +229,5 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.codeEdit.setText("MASTERMIND")
 
         self.timeEdit.hide()
+        self.buttonStart.disconnect()
         self.buttonStart.show()
