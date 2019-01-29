@@ -9,6 +9,7 @@ import serial
 
 class MainWindow(QMainWindow, Ui_mainWindow):
     codeSignal = pyqtSignal()
+    startSignal = pyqtSignal()
 
     def __init__(self, codeLength):
         super(MainWindow, self).__init__()
@@ -17,7 +18,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.ser = serial.Serial(port='COM4', baudrate=124380, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE,
                                  stopbits=serial.STOPBITS_ONE)
         self.threadPool = QThreadPool()
-        self.serialCode = Worker(self.waitCode)
+
+        self.serialSetCode = Worker(self.setCode)
+        self.serialTryCode = Worker(self.waitCode)
 
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
@@ -41,6 +44,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.initHistory()
 
         self.codeSignal.connect(self.enterCode)
+        self.startSignal.connect(self.startCountDown)
+        self.threadPool.start(self.serialSetCode)
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -51,24 +56,24 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart.setMinimumSize(QSize(0, 200))
 
         palette = self.buttonStart.palette()
-        brush = QtGui.QBrush(QtGui.QColor(179, 2, 0))
+        brush = QtGui.QBrush(QtGui.QColor(179, 179, 2))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
         self.buttonStart.setPalette(palette)
 
         font = QtGui.QFont()
         font.setFamily("BankGothic Md BT")
-        font.setPointSize(60)
+        font.setPointSize(48)
         self.buttonStart.setFont(font)
         self.buttonStart.setDefault(True)
-        self.buttonStart.setText("DEFUSE")
+        self.buttonStart.setText("Waiting for connection...")  # todo: "waiting for connection ..."
 
         self.verticalLayout_2.addWidget(self.buttonStart)
 
         self.timeEdit.hide()
         self.buttonStart.show()
 
-        self.buttonStart.clicked.connect(self.startCountDown)
+        # self.buttonStart.clicked.connect(self.startCountDown)  # todo: unlink
 
     def initHistory(self):
         self.tableWidget.setColumnCount(3)
@@ -111,7 +116,36 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
     def waitStart(self):
-        pass
+        while True:
+            s1 = self.ser.read()
+            if s1.decode('ASCII') == 'S':
+                self.startSignal.emit()
+            else:
+                continue
+
+    def setCode(self, statusSignal=None):
+        while True:
+            s1 = self.ser.read()
+            if s1.decode('ASCII') == 'N':
+                isCorrect = self.waitSetCode()
+                if isCorrect:
+                    self.waitStart()
+                    return
+                continue
+            else:
+                continue
+
+    def waitSetCode(self):
+        code = []
+        while True:
+            number = self.waitNumber()
+            if number != '*':
+                code.append(number)
+            else:
+                if "".join(code) != self.masterMind.code:
+                    return 0
+                else:
+                    return 1
 
     def waitCode(self, statusSignal=None):
         code = []
@@ -128,9 +162,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     def waitNumber(self):
         while True:
             s1 = self.ser.read()
-            if s1.decode('ASCII') == 'U':
+            if s1.decode('ASCII') == ('U' or 'N'):
                 number = self.ser.read().decode('ASCII')
-                print(number)
                 return number
             else:
                 continue
