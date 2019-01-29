@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QSizePolicy, QTableWidgetItem, QHeaderView
-from PyQt5.QtCore import QSize, Qt, QTimer, QThreadPool
+from PyQt5.QtCore import QSize, Qt, QTimer, QThreadPool, pyqtSignal
 from PyQt5 import QtGui
 from interface.mainWindowUi import Ui_mainWindow
 from mastermind import MasterMind
@@ -8,6 +8,8 @@ import serial
 
 
 class MainWindow(QMainWindow, Ui_mainWindow):
+    codeSignal = pyqtSignal()
+
     def __init__(self, codeLength):
         super(MainWindow, self).__init__()
         self.setupUi(self)
@@ -16,7 +18,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                  stopbits=serial.STOPBITS_ONE)
         self.threadPool = QThreadPool()
         self.serialCode = Worker(self.waitCode)
-        #self.serialNum = Worker(self.waitNumber)
 
         self.masterMind = MasterMind(self.codeLength)
         print("CODE: ", self.masterMind.code)
@@ -38,6 +39,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.buttonStart = QPushButton(self.centralwidget)
         self.setStart()
         self.initHistory()
+
+        self.codeSignal.connect(self.enterCode)
 
     def setStart(self):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -113,19 +116,16 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     def waitCode(self, statusSignal=None):
         code = []
         while True:
-            #self.threadpool.start(self.serialNum)
-            print('HELLO')
             number = self.waitNumber()
             if number != '*':
-                print("Code intercept")
                 code.append(number)
                 self.codeEdit.setText(''.join(code))
             else:
                 self.codeEdit.setText(''.join(code))
-                self.enterCode()
+                self.codeSignal.emit()
                 code = []
 
-    def waitNumber(self, pyqtSignal=None):
+    def waitNumber(self):
         while True:
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'U':
