@@ -117,17 +117,21 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
     def waitStart(self):
         while True:
+            print("Waiting for bomb start defusing")
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'S':
+                print("Start defuse countdown")
                 self.startSignal.emit()
                 return
             else:
                 continue
 
     def setCode(self, statusSignal=None):
+        print("Waiting for code setup verification")
         while True:
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'N':
+                print("Entering password on bomb")
                 isCorrect = self.waitSetCode()
                 if isCorrect:
                     self.waitStart()
@@ -143,9 +147,12 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             if number != '*':
                 code.append(number)
             else:
+                print("Code entered : {} VS initCode: {}".format("".join(code), self.masterMind.code))
                 if "".join(code) != self.masterMind.code:
+                    print("Code is NOT the correct")
                     return 0
                 else:
+                    print("Code is correct")
                     return 1
 
     def waitCode(self, statusSignal=None):
@@ -165,6 +172,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             s1 = self.ser.read()
             if s1.decode('ASCII') == ('U' or 'N'):
                 number = self.ser.read().decode('ASCII')
+                print(number)
                 return number
             else:
                 continue
