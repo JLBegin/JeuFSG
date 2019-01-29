@@ -120,6 +120,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'S':
                 self.startSignal.emit()
+                return
             else:
                 continue
 
