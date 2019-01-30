@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4">
+        <file>
+            <url>main.c</url>
+            <bookmark id="3">
+                <name/>
+                <line>118</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>322</line>
+                <key/>
+            </bookmark>
+            <bookmark id="4">
+                <name/>
+                <line>418</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/countdown.h</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/mcc.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/countdown.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/main.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/keypad.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/UART.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/beeper.c</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/UART.h</file>
+            <file>file:/C:/Users/marc-/Documents/GitHub/PIC-keypad-LCD-interface/CSWB.X/mcc.h</file>
+        </group>
+    </open-files>
+</project-private>
