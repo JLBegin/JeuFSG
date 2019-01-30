@@ -15,6 +15,7 @@ else:
 
 
 class MainWindow(QMainWindow, Ui_mainWindow):
+    failedSignal = pyqtSignal()
     codeSignal = pyqtSignal()
     timerSignal = pyqtSignal()
     startSignal = pyqtSignal()
@@ -29,15 +30,17 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             self.codeLength = codeLength
             self.menuWindow = menuWindow
 
-            self.threadPool = QThreadPool()
-            self.serialSetCode = Worker(self.setCode)
-            self.serialTryCode = Worker(self.waitCode)
+        self.threadPool = QThreadPool()
 
+        self.serialSetCode = Worker(self.setCode)
+        self.serialTryCode = Worker(self.waitCode)
+
+        self.failure = False
         self.found = False
         self.masterMind = MasterMind(self.codeLength)
-        print("CODE: ", self.masterMind.code)
+        self.maxTime = [45, 60, 90, 120][self.codeLength-4]
+        print("TIME: {}:{}  CODE: {}".format(self.maxTime//60, self.maxTime % 60, self.masterMind.code))
         self.history = []
-        self.maxTime = [45, 60, 90, 120]
         self.timer = QTimer()
         self.countDownTime = 5
         self.count = 0
@@ -58,6 +61,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.initHistory()
 
+        self.failedSignal.connect(self.failed)
         self.codeSignal.connect(self.enterCode)
         self.timerSignal.connect(self.timerTick)
         self.startSignal.connect(self.startCountDown)
@@ -112,17 +116,25 @@ class MainWindow(QMainWindow, Ui_mainWindow):
     def startCountDown(self):
         self.buttonStart.setText(str(self.countDownTime))
 
+        for link in [self.timer.timeout, self.timerSignal]:
+            try:
+                link.disconnect()
+            except TypeError:
+                pass
+
         self.timer.timeout.connect(self.countDownTick)
         self.timer.start(1000)
 
     def countDownTick(self):
         self.countDownTime -= 1
         if self.countDownTime == 0:
+            self.timerSignal.connect(self.timerTick)
             self.startMasterMind()
         else:
             self.buttonStart.setText(str(self.countDownTime))
 
     def startMasterMind(self):
+        self.failure = False
         self.buttonStart.hide()
         self.timeEdit.show()
 
@@ -140,16 +152,21 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.threadPool.start(self.serialTryCode)
 
     def timerTick(self):
+        if self.failure:
+            return
+
+        time = self.timeEdit.time().second() + 1
+        if time == self.maxTime:
+            self.failed()
+            return
+
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
-        time = self.timeEdit.time().second()
-        maxTime = self.maxTime[self.codeLength-4]
-
-        if time < maxTime - 30:
+        if time < self.maxTime - 30:
             color = "(56, 115, 255)"
-        elif time < maxTime - 15:
+        elif time < self.maxTime - 15:
             color = "(75, 255, 75)"
-        elif time < maxTime - 5:
+        elif time < self.maxTime - 5:
             color = "(255, 255, 255)"
         else:
             color = "(255, 75, 75)"
@@ -200,8 +217,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         code = []
         while True:
             number = self.waitNumber()
-            if self.found:
-                return
+            if self.found or self.failure:
+                break
             elif number != '*':
                 code.append(number)
                 self.codeEdit.setText(''.join(code))
@@ -215,12 +232,15 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'U' or s1.decode('ASCII') == 'N':
                 number = self.ser.read().decode('ASCII')
-                print(number)
                 return number
             elif s1.decode('ASCII') == 'T':
                 self.timerSignal.emit()
             elif s1.decode('ASCII') == 'E':
-                self.failed()
+                self.failedSignal.emit()
+                self.failure = True
+                return
+            elif s1.decode('ASCII') == 'D':
+                self.found = True
                 return
             else:
                 continue
@@ -263,7 +283,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
     def success(self):
         self.found = True
-        self.timer.timeout.disconnect()
         time = self.timeEdit.text()
 
         palette = self.buttonStart.palette()
@@ -279,7 +298,11 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.timeEdit.hide()
         self.codeSignal.disconnect()
-        self.buttonStart.disconnect()
+        for link in [self.buttonStart, self.timer.timeout, self.timerSignal]:
+            try:
+                link.disconnect()
+            except TypeError:
+                pass
         self.buttonStart.show()
 
     def backToMenu(self):
@@ -294,7 +317,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.setStart(restart=True)
 
     def failed(self):
-        self.timer.timeout.disconnect()
+        self.failure = True
 
         palette = self.buttonStart.palette()
         brush = QtGui.QBrush(QtGui.QColor(179, 2, 0))
@@ -306,9 +329,12 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
         self.codeEdit.setMaxLength(30)
         self.codeEdit.setText("FAILED")
-        self.codeLabel.setText("FAILED")
         self.codeSignal.disconnect()
 
         self.timeEdit.hide()
-        self.buttonStart.disconnect()
+        for link in [self.buttonStart, self.timer.timeout, self.timerSignal]:
+            try:
+                link.disconnect()
+            except TypeError:
+                pass
         self.buttonStart.show()
