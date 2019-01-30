@@ -38,7 +38,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.failure = False
         self.found = False
         self.masterMind = MasterMind(self.codeLength)
-        self.maxTime = [45, 60, 90, 120][self.codeLength-4]
+        self.maxTime = [90, 105, 150, 180][self.codeLength-4]
         print("TIME: {}:{}  CODE: {}".format(self.maxTime//60, self.maxTime % 60, self.masterMind.code))
         self.history = []
         self.timer = QTimer()
@@ -99,7 +99,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         else:
             self.buttonStart.setText("Waiting for connection...")
 
-        self.timeEdit.setStyleSheet("color: rgb(56, 115, 255)")
+        self.timeEdit.setStyleSheet("color: rgb(255, 255, 255)")
 
     def initHistory(self):
         self.tableWidget.setColumnCount(3)
@@ -153,20 +153,21 @@ class MainWindow(QMainWindow, Ui_mainWindow):
 
     def timerTick(self):
         if self.failure:
+            self.failed()
             return
 
-        time = self.timeEdit.time().second() + 1
+        time = self.timeEdit.time().second() + 1 + (self.timeEdit.time().minute() * 60)
         if time == self.maxTime:
             self.failed()
             return
 
         self.timeEdit.setTime(self.timeEdit.time().addSecs(1))
 
-        if time < self.maxTime - 30:
+        if time < (self.maxTime - 65):
             color = "(56, 115, 255)"
-        elif time < self.maxTime - 15:
+        elif time < (self.maxTime - 45):
             color = "(75, 255, 75)"
-        elif time < self.maxTime - 5:
+        elif time < (self.maxTime - 10):
             color = "(255, 255, 255)"
         else:
             color = "(255, 75, 75)"
@@ -210,7 +211,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                     print("Code is NOT the correct")
                     return 0
                 else:
-                    print("Code is correct")
+                    print("Code is CORRECT")
                     return 1
 
     def waitCode(self, statusSignal=None):
@@ -232,7 +233,13 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             s1 = self.ser.read()
             if s1.decode('ASCII') == 'U' or s1.decode('ASCII') == 'N':
                 number = self.ser.read().decode('ASCII')
-                return number
+                if self.failure:
+                    self.failed()
+                    return
+                if number == 'A' or number == 'B' or number == 'C' or number == 'D':
+                    continue
+                else:
+                    return number
             elif s1.decode('ASCII') == 'T':
                 self.timerSignal.emit()
             elif s1.decode('ASCII') == 'E':
@@ -317,7 +324,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.setStart(restart=True)
 
     def failed(self):
+        print("Fail")
         self.failure = True
+        self.codeEdit.setStyleSheet("color: rgb(255, 75, 75")
 
         palette = self.buttonStart.palette()
         brush = QtGui.QBrush(QtGui.QColor(179, 2, 0))
